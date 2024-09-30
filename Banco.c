@@ -159,7 +159,7 @@ void ver_extrato(Conta *conta) {
     FILE *arquivo = fopen("extrato.txt", "r");
     char linha[256];
 
->>>>>>> Pedro
+
     if (arquivo == NULL) {
         printf("Nenhum extrato encontrado.\n");
     } else {
@@ -173,7 +173,6 @@ void ver_extrato(Conta *conta) {
 
 
     exibir_menu(conta); 
->>>>>>> Pedro
 }
 
 // Função para depositar
@@ -197,7 +196,6 @@ double depositar(Conta *conta) {
     exibir_menu(conta); 
     return conta->saldo;
 }
->>>>>>> Pedro
 // Função para sacar
 double sacar(Conta *conta) {
     double saque;
@@ -216,7 +214,6 @@ double sacar(Conta *conta) {
 
 
     exibir_menu(conta); 
->>>>>>> Pedro
     return conta->saldo;
 }
 
@@ -247,7 +244,6 @@ void comprar_criptomoedas(Conta *conta) {
     }
 
     conta->saldo -= valor_investido;
->>>>>>> Pedro
 
     if (coins == 1) {
         conta->bitcoin += (valor_investido * 0.98) / conta->cotacao_bitcoin;
@@ -267,7 +263,6 @@ void comprar_criptomoedas(Conta *conta) {
 
 
     exibir_menu(conta); 
->>>>>>> Pedro
 }
 
 // Função para vender cripto
@@ -290,7 +285,6 @@ void vender_criptomoedas(Conta *conta) {
             conta->saldo += (qtd_vender * conta->cotacao_bitcoin) * 0.98;
 
             conta->saldo += (qtd_vender * conta->cotacao_bitcoin) * 0.97;
->>>>>>> Pedro
             printf("Venda de Bitcoin realizada.\n");
             salvar_transacao("Venda", "Bitcoin");
         } else {
@@ -304,7 +298,6 @@ void vender_criptomoedas(Conta *conta) {
             conta->saldo += (qtd_vender * conta->cotacao_ethereum) * 0.99;
 
             conta->saldo += (qtd_vender * conta->cotacao_ethereum) * 0.98;
->>>>>>> Pedro
             printf("Venda de Ethereum realizada.\n");
             salvar_transacao("Venda", "Ethereum");
         } else {
@@ -327,7 +320,6 @@ void vender_criptomoedas(Conta *conta) {
 
 
     exibir_menu(conta); 
->>>>>>> Pedro
 }
 
 // Função que atualiza cotação das criptos
@@ -343,7 +335,6 @@ void atualizar_cotacao(Conta *conta) {
 
 
     exibir_menu(conta); 
->>>>>>> Pedro
 }
 
 // Função para sair do sistema
@@ -398,4 +389,3 @@ int main() {
 }
 
 }
->>>>>>> Pedro
