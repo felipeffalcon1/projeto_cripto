@@ -151,10 +151,17 @@ void consultar_saldo(Conta *conta) {
 }
 
 // Função para ver extrato
+<<<<<<< HEAD
 void ver_extrato() {
     FILE *arquivo = fopen("extrato.txt", "r");
     char linha[256];
     
+=======
+void ver_extrato(Conta *conta) {
+    FILE *arquivo = fopen("extrato.txt", "r");
+    char linha[256];
+
+>>>>>>> Pedro
     if (arquivo == NULL) {
         printf("Nenhum extrato encontrado.\n");
     } else {
@@ -164,6 +171,11 @@ void ver_extrato() {
         }
         fclose(arquivo);
     }
+<<<<<<< HEAD
+=======
+
+    exibir_menu(conta); 
+>>>>>>> Pedro
 }
 
 // Função para depositar
@@ -179,9 +191,16 @@ double depositar(Conta *conta) {
         printf("Depósito de R$%.2f realizado com sucesso.\n", dep);
         salvar_transacao("Depósito", "Depósito realizado");
     }
+<<<<<<< HEAD
     return conta->saldo;
 }
 
+=======
+
+    exibir_menu(conta); 
+    return conta->saldo;
+}
+>>>>>>> Pedro
 // Função para sacar
 double sacar(Conta *conta) {
     double saque;
@@ -197,6 +216,11 @@ double sacar(Conta *conta) {
         printf("Saque de R$%.2f realizado com sucesso.\n", saque);
         salvar_transacao("Saque", "Saque realizado");
     }
+<<<<<<< HEAD
+=======
+
+    exibir_menu(conta); 
+>>>>>>> Pedro
     return conta->saldo;
 }
 
@@ -217,10 +241,18 @@ void comprar_criptomoedas(Conta *conta) {
 
     if (valor_investido > conta->saldo) {
         printf("Saldo insuficiente para essa compra.\n");
+<<<<<<< HEAD
         return;
     }
 
     conta->saldo -= valor_investido; 
+=======
+        exibir_menu(conta); 
+        return;
+    }
+
+    conta->saldo -= valor_investido;
+>>>>>>> Pedro
 
     if (coins == 1) {
         conta->bitcoin += (valor_investido * 0.98) / conta->cotacao_bitcoin;
@@ -237,6 +269,11 @@ void comprar_criptomoedas(Conta *conta) {
     } else {
         printf("Criptomoeda inválida.\n");
     }
+<<<<<<< HEAD
+=======
+
+    exibir_menu(conta); 
+>>>>>>> Pedro
 }
 
 // Função para vender cripto
@@ -256,7 +293,11 @@ void vender_criptomoedas(Conta *conta) {
         scanf("%lf", &qtd_vender);
         if (qtd_vender <= conta->bitcoin) {
             conta->bitcoin -= qtd_vender;
+<<<<<<< HEAD
             conta->saldo += (qtd_vender * conta->cotacao_bitcoin) * 0.98;
+=======
+            conta->saldo += (qtd_vender * conta->cotacao_bitcoin) * 0.97;
+>>>>>>> Pedro
             printf("Venda de Bitcoin realizada.\n");
             salvar_transacao("Venda", "Bitcoin");
         } else {
@@ -267,7 +308,11 @@ void vender_criptomoedas(Conta *conta) {
         scanf("%lf", &qtd_vender);
         if (qtd_vender <= conta->ethereum) {
             conta->ethereum -= qtd_vender;
+<<<<<<< HEAD
             conta->saldo += (qtd_vender * conta->cotacao_ethereum) * 0.99;
+=======
+            conta->saldo += (qtd_vender * conta->cotacao_ethereum) * 0.98;
+>>>>>>> Pedro
             printf("Venda de Ethereum realizada.\n");
             salvar_transacao("Venda", "Ethereum");
         } else {
@@ -287,6 +332,11 @@ void vender_criptomoedas(Conta *conta) {
     } else {
         printf("Criptomoeda inválida.\n");
     }
+<<<<<<< HEAD
+=======
+
+    exibir_menu(conta); 
+>>>>>>> Pedro
 }
 
 // Função que atualiza cotação das criptos
@@ -299,6 +349,11 @@ void atualizar_cotacao(Conta *conta) {
     printf("Ethereum: R$%.2f\n", conta->cotacao_ethereum);
     printf("Ripple: R$%.2f\n", conta->cotacao_ripple);
     salvar_transacao("Cotação", "Cotações atualizadas");
+<<<<<<< HEAD
+=======
+
+    exibir_menu(conta); 
+>>>>>>> Pedro
 }
 
 // Função para sair do sistema
@@ -350,4 +405,8 @@ int main() {
     srand(time(NULL)); 
     autenticacao();     
     return 0;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Pedro
