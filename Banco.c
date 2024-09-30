@@ -140,3 +140,62 @@ void exibir_menu(Conta *conta) {
             exibir_menu(conta);
     }
 }
+
+// Função para consultar saldo
+void consultar_saldo(Conta *conta) {
+    printf("Reais: R$%.2f\n", conta->saldo);
+    printf("Bitcoin: %.6f\n", conta->bitcoin);
+    printf("Ethereum: %.6f\n", conta->ethereum);
+    printf("Ripple: %.6f\n", conta->ripple);
+    exibir_menu(conta);
+}
+
+// Função para ver extrato
+void ver_extrato() {
+    FILE *arquivo = fopen("extrato.txt", "r");
+    char linha[256];
+    
+    if (arquivo == NULL) {
+        printf("Nenhum extrato encontrado.\n");
+    } else {
+        printf("\n--- EXTRATO ---\n");
+        while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+            printf("%s", linha);
+        }
+        fclose(arquivo);
+    }
+}
+
+// Função para depositar
+double depositar(Conta *conta) {
+    double dep;
+    printf("Digite o valor a ser depositado: R$");
+    scanf("%lf", &dep);
+
+    if (dep <= 0) {
+        printf("Deposito invalido, depositar um valor maior que zero.\n");
+    } else {
+        conta->saldo += dep;
+        printf("Depósito de R$%.2f realizado com sucesso.\n", dep);
+        salvar_transacao("Depósito", "Depósito realizado");
+    }
+    return conta->saldo;
+}
+
+// Função para sacar
+double sacar(Conta *conta) {
+    double saque;
+    printf("Digite o valor a ser sacado: R$");
+    scanf("%lf", &saque);
+
+    if (saque <= 0) {
+        printf("Saque invalido, sacar um valor maior que zero.\n");
+    } else if (saque > conta->saldo) {
+        printf("Saque invalido, você está sem saldo.\n");
+    } else {
+        conta->saldo -= saque;
+        printf("Saque de R$%.2f realizado com sucesso.\n", saque);
+        salvar_transacao("Saque", "Saque realizado");
+    }
+    return conta->saldo;
+}
