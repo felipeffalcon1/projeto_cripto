@@ -199,3 +199,104 @@ double sacar(Conta *conta) {
     }
     return conta->saldo;
 }
+
+// Função para comprar cripto
+void comprar_criptomoedas(Conta *conta) {
+    int coins;
+    double valor_investido;
+
+    printf("\n--- COMPRA DE CRIPTOMOEDAS ---\n");
+    printf("1. Bitcoin\n");
+    printf("2. Ethereum\n");
+    printf("3. Ripple\n");
+    printf("Digite o código da criptomoeda que você deseja comprar: ");
+    scanf("%d", &coins);
+
+    printf("Digite o valor em reais que você quer investir: R$");
+    scanf("%lf", &valor_investido);
+
+    if (valor_investido > conta->saldo) {
+        printf("Saldo insuficiente para essa compra.\n");
+        return;
+    }
+
+    conta->saldo -= valor_investido; 
+
+    if (coins == 1) {
+        conta->bitcoin += (valor_investido * 0.98) / conta->cotacao_bitcoin;
+        printf("Quantidade de Bitcoin comprada: %.6f\n", conta->bitcoin);
+        salvar_transacao("Compra", "Bitcoin");
+    } else if (coins == 2) {
+        conta->ethereum += (valor_investido * 0.99) / conta->cotacao_ethereum;
+        printf("Quantidade de Ethereum comprada: %.6f\n", conta->ethereum);
+        salvar_transacao("Compra", "Ethereum");
+    } else if (coins == 3) {
+        conta->ripple += (valor_investido * 0.99) / conta->cotacao_ripple;
+        printf("Quantidade de Ripple comprada: %.6f\n", conta->ripple);
+        salvar_transacao("Compra", "Ripple");
+    } else {
+        printf("Criptomoeda inválida.\n");
+    }
+}
+
+// Função para vender cripto
+void vender_criptomoedas(Conta *conta) {
+    int coins;
+    double qtd_vender;
+
+    printf("\n--- VENDA DE CRIPTOMOEDAS ---\n");
+    printf("1. Bitcoin\n");
+    printf("2. Ethereum\n");
+    printf("3. Ripple\n");
+    printf("Digite o código da criptomoeda que você deseja vender: ");
+    scanf("%d", &coins);
+
+    if (coins == 1) {
+        printf("Digite a quantidade de Bitcoin a ser vendida: ");
+        scanf("%lf", &qtd_vender);
+        if (qtd_vender <= conta->bitcoin) {
+            conta->bitcoin -= qtd_vender;
+            conta->saldo += (qtd_vender * conta->cotacao_bitcoin) * 0.98;
+            printf("Venda de Bitcoin realizada.\n");
+            salvar_transacao("Venda", "Bitcoin");
+        } else {
+            printf("Quantidade de Bitcoin insuficiente.\n");
+        }
+    } else if (coins == 2) {
+        printf("Digite a quantidade de Ethereum a ser vendida: ");
+        scanf("%lf", &qtd_vender);
+        if (qtd_vender <= conta->ethereum) {
+            conta->ethereum -= qtd_vender;
+            conta->saldo += (qtd_vender * conta->cotacao_ethereum) * 0.99;
+            printf("Venda de Ethereum realizada.\n");
+            salvar_transacao("Venda", "Ethereum");
+        } else {
+            printf("Quantidade de Ethereum insuficiente.\n");
+        }
+    } else if (coins == 3) {
+        printf("Digite a quantidade de Ripple a ser vendida: ");
+        scanf("%lf", &qtd_vender);
+        if (qtd_vender <= conta->ripple) {
+            conta->ripple -= qtd_vender;
+            conta->saldo += (qtd_vender * conta->cotacao_ripple) * 0.99;
+            printf("Venda de Ripple realizada.\n");
+            salvar_transacao("Venda", "Ripple");
+        } else {
+            printf("Quantidade de Ripple insuficiente.\n");
+        }
+    } else {
+        printf("Criptomoeda inválida.\n");
+    }
+}
+
+// Função que atualiza cotação das criptos
+void atualizar_cotacao(Conta *conta) {
+    conta->cotacao_bitcoin = random_double(250000, 350000);
+    conta->cotacao_ethereum = random_double(12000, 18000);
+    conta->cotacao_ripple = random_double(1.8, 3.5);
+    printf("Cotações atualizadas:\n");
+    printf("Bitcoin: R$%.2f\n", conta->cotacao_bitcoin);
+    printf("Ethereum: R$%.2f\n", conta->cotacao_ethereum);
+    printf("Ripple: R$%.2f\n", conta->cotacao_ripple);
+    salvar_transacao("Cotação", "Cotações atualizadas");
+}
