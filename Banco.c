@@ -85,7 +85,58 @@ void salvar_transacao(const char *tipo, const char *detalhes) {
     time_t agora = time(NULL);
     struct tm *t = localtime(&agora);
     snprintf(transacao, sizeof(transacao), "[%02d/%02d/%d %02d:%02d:%02d] %s: %s", 
-             t->tm_mday, t->tm_mon + 1, t->tm_year + 1900, 
-             t->tm_hour, t->tm_min, t->tm_sec, tipo, detalhes);
+            t->tm_mday, t->tm_mon + 1, t->tm_year + 1900, 
+            t->tm_hour, t->tm_min, t->tm_sec, tipo, detalhes);
     escrever_no_extrato(transacao);
+}
+
+// Função para exibir o menu principal
+void exibir_menu(Conta *conta) {
+    int escolha;
+    printf("\n--- MENU ---\n");
+    printf("1. Consultar saldo\n");
+    printf("2. Ver extrato\n");
+    printf("3. Depositar\n");
+    printf("4. Sacar\n");
+    printf("5. Comprar criptomoedas\n");
+    printf("6. Vender criptomoedas\n");
+    printf("7. Atualizar cotação\n");
+    printf("8. Sair\n");
+
+    printf("Digite sua opção: ");
+    scanf("%d", &escolha);
+
+    switch (escolha) {
+        case 1:
+            consultar_saldo(conta);
+            break;
+        case 2:
+            ver_extrato();
+            break;
+        case 3:
+            conta->saldo = depositar(conta);
+            reescrever_no_txt(conta);
+            break;
+        case 4:
+            conta->saldo = sacar(conta);
+            reescrever_no_txt(conta);
+            break;
+        case 5:
+            comprar_criptomoedas(conta);
+            reescrever_no_txt(conta);
+            break;
+        case 6:
+            vender_criptomoedas(conta);
+            reescrever_no_txt(conta);
+            break;
+        case 7:
+            atualizar_cotacao(conta);
+            break;
+        case 8:
+            sair();
+            break;
+        default:
+            printf("Opção inválida. Tente novamente.\n");
+            exibir_menu(conta);
+    }
 }
