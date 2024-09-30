@@ -300,3 +300,54 @@ void atualizar_cotacao(Conta *conta) {
     printf("Ripple: R$%.2f\n", conta->cotacao_ripple);
     salvar_transacao("Cotação", "Cotações atualizadas");
 }
+
+// Função para sair do sistema
+void sair() {
+    printf("Saindo...\n");
+    exit(0);
+}
+
+// Função para autenticar
+void autenticacao() {
+    char senha[7];
+    char cpf[12];
+    Conta conta;
+
+    // Solicitar senha
+    while (1) {
+        printf("Insira sua senha de 6 dígitos: ");
+        scanf("%6s", senha);
+        if (strlen(senha) != 6) {
+            printf("Senha inválida. A senha deve conter exatamente 6 dígitos. Tente novamente.\n");
+        } else {
+            break;
+        }
+    }
+
+    // Solicitar CPF
+    while (1) {
+        printf("Insira seu CPF (apenas números): ");
+        scanf("%11s", cpf);
+        if (strlen(cpf) != 11) {
+            printf("CPF inválido. O CPF deve conter exatamente 11 dígitos sem traços e pontos. Tente novamente.\n");
+        } else {
+            break;
+        }
+    }
+
+    // Verifição de login
+    if (strcmp(cpf, "47997003835") == 0 && strcmp(senha, "123456") == 0) {
+        printf("Login bem sucedido. Acesso liberado!\n");
+        carregar_saldo(&conta);  
+        exibir_menu(&conta);     
+    } else {
+        printf("Login inválido. Tente novamente.\n");
+    }
+}
+
+
+int main() {
+    srand(time(NULL)); 
+    autenticacao();     
+    return 0;
+}
