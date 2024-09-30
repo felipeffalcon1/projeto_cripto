@@ -264,7 +264,7 @@ void vender_criptomoedas(Conta *conta) {
         scanf("%lf", &qtd_vender);
         if (qtd_vender <= conta->bitcoin) {
             conta->bitcoin -= qtd_vender;
-            conta->saldo += (qtd_vender * conta->cotacao_bitcoin) * 0.98;
+            conta->saldo += (qtd_vender * conta->cotacao_bitcoin) * 0.97;
             printf("Venda de Bitcoin realizada.\n");
             salvar_transacao("Venda", "Bitcoin");
         } else {
@@ -275,7 +275,7 @@ void vender_criptomoedas(Conta *conta) {
         scanf("%lf", &qtd_vender);
         if (qtd_vender <= conta->ethereum) {
             conta->ethereum -= qtd_vender;
-            conta->saldo += (qtd_vender * conta->cotacao_ethereum) * 0.99;
+            conta->saldo += (qtd_vender * conta->cotacao_ethereum) * 0.98;
             printf("Venda de Ethereum realizada.\n");
             salvar_transacao("Venda", "Ethereum");
         } else {
